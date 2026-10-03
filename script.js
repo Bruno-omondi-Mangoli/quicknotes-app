@@ -6,6 +6,7 @@ const list = document.querySelector("#notes-list");
 const count = document.querySelector("#note-count");
 const errorMessage = document.querySelector("#error-message");
 const searchInput = document.querySelector("#search-input");
+const clearAllBtn = document.querySelector("#clear-all-btn");
 
 const STORAGE_KEY = "quicknotes";
 const MAX_LENGTH = 200;
@@ -125,6 +126,15 @@ form.addEventListener("submit", (event) => {
 });
 
 searchInput.addEventListener("input", render);
+
+clearAllBtn.addEventListener("click", () => {
+  if (notes.length === 0) return;
+  if (confirm("Delete all notes?")) {
+    notes = [];
+    saveNotes();
+    render();
+  }
+});
 
 // ---------- 7. Draw once when the page first loads ----------
 render();
